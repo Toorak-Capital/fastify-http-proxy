@@ -321,7 +321,7 @@ async function fastifyHttpProxy (fastify, opts) {
 
     if (this.prefix.includes(':')) {
       const requestedPathElements = request.url.split('/')
-      const prefixPathWithVariables = this.prefix.split('/').map((_, index) => requestedPathElements[index]).join('/')
+      let prefixPathWithVariables = this.prefix.split('/').map((_, index) => requestedPathElements[index]).join('/').split('?')[0]
 
       let rewritePrefixWithVariables = rewritePrefix
       for (const [name, value] of Object.entries(request.params)) {
